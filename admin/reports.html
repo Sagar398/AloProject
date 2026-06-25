@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li class="active"><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">No new notifications</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">Reports & Analytics</h2>
+                        <p class="text-muted">Generate and download various reports to track platform performance</p>
+                    </div>
+                </div>
+                
+                <!-- Report Tabs -->
+                <ul class="nav nav-tabs mb-4" id="reportTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                            <i class="fas fa-chart-pie"></i> Overview
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="bookings-tab" data-bs-toggle="tab" data-bs-target="#bookings" type="button" role="tab">
+                            <i class="fas fa-calendar-check"></i> Bookings Report
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
+                            <i class="fas fa-shopping-cart"></i> Orders Report
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button" role="tab">
+                            <i class="fas fa-credit-card"></i> Payments Report
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
+                            <i class="fas fa-users"></i> Users Report
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button" role="tab">
+                            <i class="fas fa-boxes"></i> Inventory Report
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    
+                    <!-- ==================== OVERVIEW TAB ==================== -->
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                        <!-- Date Range Filter -->
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">From Date</label>
+                                    <input type="date" class="form-control" id="overviewFromDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">To Date</label>
+                                    <input type="date" class="form-control" id="overviewToDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Report Type</label>
+                                    <select class="form-select" id="overviewReportType">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
+                                    <button class="btn btn-primary me-2" id="applyOverviewFilter"><i class="fas fa-filter"></i> Apply</button>
+                                    <button class="btn btn-success" id="exportOverviewReport"><i class="fas fa-download"></i> Export</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- KPI Cards -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 id="kpiTotalRevenue">$0</h3>
+                                            <p class="text-muted mb-0">Total Revenue</p>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 id="kpiTotalBookings">0</h3>
+                                            <p class="text-muted mb-0">Total Bookings</p>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 id="kpiTotalOrders">0</h3>
+                                            <p class="text-muted mb-0">Total Orders</p>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 id="kpiTotalCustomers">0</h3>
+                                            <p class="text-muted mb-0">Active Customers</p>
+                                        </div>
+                                        <div class="stat-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Charts Row -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-8">
+                                <div class="data-table">
+                                    <h5 class="mb-3">Revenue Trend</h5>
+                                    <canvas id="revenueTrendChart" height="250"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="data-table">
+                                    <h5 class="mb-3">Booking Status</h5>
+                                    <canvas id="bookingStatusChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="data-table">
+                                    <h5 class="mb-3">Top Services</h5>
+                                    <canvas id="topServicesChart" height="200"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="data-table">
+                                    <h5 class="mb-3">Top Sellers</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm" id="topSellersTable">
+                                            <thead>
+                                                <tr><th>Seller</th><th>Revenue</th><th>Items Sold</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Dynamic content -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== BOOKINGS REPORT TAB ==================== -->
+                    <div class="tab-pane fade" id="bookings" role="tabpanel">
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">From Date</label>
+                                    <input type="date" class="form-control" id="bookingsFromDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">To Date</label>
+                                    <input type="date" class="form-control" id="bookingsToDate">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select" id="bookingsStatusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="confirmed">Confirmed</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Service Type</label>
+                                    <select class="form-select" id="bookingsServiceFilter">
+                                        <option value="all">All Services</option>
+                                        <option value="plumbing">Plumbing</option>
+                                        <option value="electrical">Electrical</option>
+                                        <option value="painting">Painting</option>
+                                        <option value="ac">AC Repair</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-primary w-100" id="generateBookingsReport"><i class="fas fa-chart-line"></i> Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Bookings List</h5>
+                                <button class="btn btn-sm btn-success" id="exportBookingsReport"><i class="fas fa-file-excel"></i> Export to Excel</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="bookingsReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Customer</th>
+                                            <th>Service</th>
+                                            <th>Provider</th>
+                                            <th>Booking Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bookingsReportBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="bookingsReportPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== ORDERS REPORT TAB ==================== -->
+                    <div class="tab-pane fade" id="orders" role="tabpanel">
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">From Date</label>
+                                    <input type="date" class="form-control" id="ordersFromDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">To Date</label>
+                                    <input type="date" class="form-control" id="ordersToDate">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Order Status</label>
+                                    <select class="form-select" id="ordersStatusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="confirmed">Confirmed</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Order Type</label>
+                                    <select class="form-select" id="ordersTypeFilter">
+                                        <option value="all">All Types</option>
+                                        <option value="pickup">Pickup from Store</option>
+                                        <option value="delivery">Home Delivery</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-primary w-100" id="generateOrdersReport"><i class="fas fa-chart-line"></i> Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Orders List</h5>
+                                <button class="btn btn-sm btn-success" id="exportOrdersReport"><i class="fas fa-file-excel"></i> Export to Excel</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="ordersReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Shop/Seller</th>
+                                            <th>Order Date</th>
+                                            <th>Amount</th>
+                                            <th>Payment Method</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ordersReportBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="ordersReportPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== PAYMENTS REPORT TAB ==================== -->
+                    <div class="tab-pane fade" id="payments" role="tabpanel">
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">From Date</label>
+                                    <input type="date" class="form-control" id="paymentsFromDate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">To Date</label>
+                                    <input type="date" class="form-control" id="paymentsToDate">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Payment Status</label>
+                                    <select class="form-select" id="paymentsStatusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="success">Success</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="failed">Failed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Payment Method</label>
+                                    <select class="form-select" id="paymentsMethodFilter">
+                                        <option value="all">All Methods</option>
+                                        <option value="VISA">VISA</option>
+                                        <option value="MoMo">MoMo</option>
+                                        <option value="OM">OM</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-primary w-100" id="generatePaymentsReport"><i class="fas fa-chart-line"></i> Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Total Collected</h6>
+                                    <h3 id="paymentsTotalCollected">$0</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Commission Earned</h6>
+                                    <h3 id="paymentsCommission">$0</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Pending Settlements</h6>
+                                    <h3 id="paymentsPendingSettlements">$0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Payment Transactions</h5>
+                                <button class="btn btn-sm btn-success" id="exportPaymentsReport"><i class="fas fa-file-excel"></i> Export to Excel</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="paymentsReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment ID</th>
+                                            <th>Customer</th>
+                                            <th>Service/Order</th>
+                                            <th>Amount</th>
+                                            <th>Method</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="paymentsReportBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="paymentsReportPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== USERS REPORT TAB ==================== -->
+                    <div class="tab-pane fade" id="users" role="tabpanel">
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">User Type</label>
+                                    <select class="form-select" id="userTypeFilter">
+                                        <option value="all">All Users</option>
+                                        <option value="customer">Customers</option>
+                                        <option value="provider">Service Providers</option>
+                                        <option value="seller">Sellers/Shops</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-select" id="userStatusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Registration Date</label>
+                                    <input type="date" class="form-control" id="userRegistrationDate">
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-primary w-100" id="generateUsersReport"><i class="fas fa-chart-line"></i> Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="stat-card text-center">
+                                    <h3 id="usersTotalCustomers">0</h3>
+                                    <p>Total Customers</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card text-center">
+                                    <h3 id="usersTotalProviders">0</h3>
+                                    <p>Service Providers</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card text-center">
+                                    <h3 id="usersTotalSellers">0</h3>
+                                    <p>Sellers/Shops</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card text-center">
+                                    <h3 id="usersNewThisMonth">0</h3>
+                                    <p>New This Month</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Users List</h5>
+                                <button class="btn btn-sm btn-success" id="exportUsersReport"><i class="fas fa-file-excel"></i> Export to Excel</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="usersReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Registered</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersReportBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="usersReportPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== INVENTORY REPORT TAB ==================== -->
+                    <div class="tab-pane fade" id="inventory" role="tabpanel">
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">Shop</label>
+                                    <select class="form-select" id="inventoryShopFilter">
+                                        <option value="all">All Shops</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-select" id="inventoryCategoryFilter">
+                                        <option value="all">All Categories</option>
+                                        <option value="tools">Tools & Hardware</option>
+                                        <option value="electronics">Electronics</option>
+                                        <option value="furniture">Furniture</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Stock Status</label>
+                                    <select class="form-select" id="inventoryStockFilter">
+                                        <option value="all">All Stock</option>
+                                        <option value="low">Low Stock (<10)</option>
+                                        <option value="out">Out of Stock (0)</option>
+                                        <option value="instock">In Stock (>0)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-primary w-100" id="generateInventoryReport"><i class="fas fa-chart-line"></i> Generate</button>
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button class="btn btn-success w-100" id="exportInventoryReport"><i class="fas fa-file-excel"></i> Export</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Total Items</h6>
+                                    <h3 id="inventoryTotalItems">0</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Total Stock Value</h6>
+                                    <h3 id="inventoryTotalValue">$0</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="stat-card">
+                                    <h6>Low Stock Items</h6>
+                                    <h3 id="inventoryLowStockCount">0</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Inventory Items</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="inventoryReportTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Item Name</th>
+                                            <th>Shop</th>
+                                            <th>Category</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                            <th>Total Value</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inventoryReportBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="inventoryReportPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/reports.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>

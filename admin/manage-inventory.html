@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Inventory - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li class="active"><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">2</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">New item added to inventory</a></li>
+                            <li><a class="dropdown-item" href="#">Low stock alert</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">Manage Inventory</h2>
+                        <p class="text-muted">Manage all items from shops/sellers across the platform</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="addItemBtn">
+                            <i class="fas fa-plus-circle"></i> Add New Item
+                        </button>
+                        <button class="btn btn-outline-primary ms-2" id="exportInventoryBtn">
+                            <i class="fas fa-file-excel"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Statistics Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalItems">0</h3>
+                                    <p class="text-muted mb-0">Total Items</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalShops">0</h3>
+                                    <p class="text-muted mb-0">Active Shops</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalStockValue">$0</h3>
+                                    <p class="text-muted mb-0">Total Stock Value</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="lowStockItems">0</h3>
+                                    <p class="text-muted mb-0">Low Stock Items</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Section -->
+                <div class="data-table mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Search</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" id="searchItem" placeholder="Item name, shop name...">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Shop</label>
+                            <select class="form-select" id="shopFilter">
+                                <option value="all">All Shops</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" id="categoryFilter">
+                                <option value="all">All Categories</option>
+                                <option value="tools">Tools & Hardware</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="paint">Paint & Supplies</option>
+                                <option value="plumbing">Plumbing Supplies</option>
+                                <option value="electrical">Electrical Supplies</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="itemStatusFilter">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Stock Range</label>
+                            <div class="d-flex gap-2">
+                                <input type="number" class="form-control" id="minStock" placeholder="Min stock" style="width: 50%;">
+                                <input type="number" class="form-control" id="maxStock" placeholder="Max stock" style="width: 50%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 text-end">
+                            <button class="btn btn-outline-secondary" id="resetInventoryFiltersBtn">
+                                <i class="fas fa-undo-alt"></i> Reset Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Inventory Table -->
+                <div class="data-table">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="inventoryTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Item Image</th>
+                                    <th>Item Name</th>
+                                    <th>Shop Name</th>
+                                    <th>Category</th>
+                                    <th>Unit Price</th>
+                                    <th>Stock Qty</th>
+                                    <th>Total Price</th>
+                                    <th>Discount</th>
+                                    <th>Created At</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav class="mt-3">
+                        <ul class="pagination justify-content-end" id="inventoryPagination"></ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Item Modal -->
+    <div class="modal fade" id="itemModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="itemModalTitle"><i class="fas fa-box"></i> Add New Item</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editItemId">
+                    
+                    <!-- Shop Details Selection -->
+                    <h6 class="mb-3 text-primary"><i class="fas fa-store"></i> Shop Details</h6>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Select Shop <span class="text-danger">*</span></label>
+                            <select class="form-select" id="itemShopId">
+                                <option value="">Select Shop</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Shop Info Display (Auto-filled) -->
+                    <div id="shopInfoDisplay" class="alert alert-info mb-3" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Shop Name:</strong> <span id="displayShopName"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Shop Email:</strong> <span id="displayShopEmail"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Shop Mobile:</strong> <span id="displayShopMobile"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Shop Address:</strong> <span id="displayShopAddress"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item Details -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-tag"></i> Item Details</h6>
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-3">
+                            <div class="item-image-upload">
+                                <img id="itemImagePreview" src="https://via.placeholder.com/150?text=Item+Image" alt="Item Image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 10px;">
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" id="uploadItemImageBtn">
+                                        <i class="fas fa-camera"></i> Upload Image
+                                    </button>
+                                    <input type="file" id="itemImage" accept="image/*" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Item Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Category <span class="text-danger">*</span></label>
+                            <select class="form-select" id="itemCategory">
+                                <option value="">Select Category</option>
+                                <option value="tools">Tools & Hardware</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="paint">Paint & Supplies</option>
+                                <option value="plumbing">Plumbing Supplies</option>
+                                <option value="electrical">Electrical Supplies</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Sub-Category</label>
+                            <input type="text" class="form-control" id="itemSubCategory" placeholder="Enter sub-category">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Unit Price <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="itemPrice" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Stock Quantity <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="itemStock" placeholder="0" min="0">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="itemDescription" rows="3" placeholder="Item description..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Details -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-dollar-sign"></i> Price Details</h6>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Default Unit Price</label>
+                            <input type="text" class="form-control" id="defaultUnitPrice" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Discount Type</label>
+                            <select class="form-select" id="discountType">
+                                <option value="none">No Discount</option>
+                                <option value="percentage">Percentage (%)</option>
+                                <option value="amount">Fixed Amount ($)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Discount Value</label>
+                            <input type="number" class="form-control" id="discountValue" placeholder="0" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <!-- Total Price Display -->
+                    <div class="alert alert-success">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>Item Price:</strong> <span id="displayItemPrice">$0.00</span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Discount:</strong> <span id="displayDiscount">$0.00</span>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Final Price:</strong> <span id="displayFinalPrice">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Status -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-toggle-on"></i> Status</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Item Status</label>
+                            <select class="form-select" id="itemStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveItemBtn">Save Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- View Item Modal -->
+    <div class="modal fade" id="viewItemModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fas fa-box"></i> Item Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="viewItemBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-trash-alt"></i> Confirm Delete</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteItemId">
+                    <p>Are you sure you want to delete this item?</p>
+                    <p class="text-danger"><strong>Warning:</strong> This action cannot be undone. All data related to this item will be permanently deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Low Stock Alert Modal -->
+    <div class="modal fade" id="lowStockModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Low Stock Alert</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="lowStockBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="restockItems()">Restock Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/inventory.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>

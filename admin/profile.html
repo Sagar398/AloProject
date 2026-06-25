@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li class="active"><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">No new notifications</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">My Profile</h2>
+                        <p class="text-muted">Manage your account information and password</p>
+                    </div>
+                </div>
+                
+                <!-- Profile Tabs -->
+                <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">
+                            <i class="fas fa-user"></i> Profile Details
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password" type="button" role="tab">
+                            <i class="fas fa-lock"></i> Change Password
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab">
+                            <i class="fas fa-history"></i> Activity Log
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab">
+                            <i class="fas fa-bell"></i> Preferences
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    
+                    <!-- ==================== PROFILE DETAILS TAB ==================== -->
+                    <div class="tab-pane fade show active" id="details" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="data-table text-center">
+                                    <div class="profile-image-container mb-3">
+                                        <img id="profileImage" src="https://randomuser.me/api/portraits/men/1.jpg" alt="Profile Picture" class="rounded-circle" width="150" height="150" style="object-fit: cover;">
+                                        <div class="mt-2">
+                                            <button type="button" class="btn btn-sm btn-outline-primary" id="uploadProfileImageBtn">
+                                                <i class="fas fa-camera"></i> Change Photo
+                                            </button>
+                                            <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <h4 id="displayName">Admin User</h4>
+                                    <p class="text-muted" id="displayRole">Super Administrator</p>
+                                    <div class="mt-3">
+                                        <span class="status-badge status-success">Active</span>
+                                    </div>
+                                    <hr>
+                                    <div class="text-start">
+                                        <p><i class="fas fa-calendar-alt me-2 text-primary"></i> Joined: <span id="displayJoined">January 15, 2024</span></p>
+                                        <p><i class="fas fa-clock me-2 text-primary"></i> Last Login: <span id="displayLastLogin">Today, 09:30 AM</span></p>
+                                        <p><i class="fas fa-shield-alt me-2 text-primary"></i> 2FA: <span id="display2FA" class="badge bg-success">Enabled</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-8">
+                                <div class="data-table">
+                                    <h5 class="mb-3"><i class="fas fa-info-circle"></i> Personal Information</h5>
+                                    <form id="profileDetailsForm">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" id="email" placeholder="Enter email address">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Mobile Number</label>
+                                                <input type="tel" class="form-control" id="mobile" placeholder="Enter mobile number">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Role</label>
+                                                <input type="text" class="form-control" id="role" readonly disabled>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Department</label>
+                                                <select class="form-select" id="department">
+                                                    <option value="Administration">Administration</option>
+                                                    <option value="Management">Management</option>
+                                                    <option value="Support">Support</option>
+                                                    <option value="Operations">Operations</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Bio</label>
+                                                <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <button type="button" class="btn btn-outline-secondary ms-2" id="cancelChangesBtn">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== CHANGE PASSWORD TAB ==================== -->
+                    <div class="tab-pane fade" id="password" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="data-table">
+                                    <h5 class="mb-3"><i class="fas fa-key"></i> Change Password</h5>
+                                    <form id="changePasswordForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Current Password <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password">
+                                                <button class="btn btn-outline-secondary" type="button" id="toggleCurrentPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">New Password <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+                                                <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div class="password-strength mt-2">
+                                                <div class="progress" style="height: 5px;">
+                                                    <div class="progress-bar" id="passwordStrengthBar" role="progressbar" style="width: 0%"></div>
+                                                </div>
+                                                <small class="text-muted" id="passwordStrengthText">Enter a new password</small>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Confirm New Password <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                                                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <small id="passwordMatchError" class="text-danger d-none">Passwords do not match</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle"></i> Password requirements:
+                                                <ul class="mb-0 mt-1">
+                                                    <li>At least 8 characters long</li>
+                                                    <li>Contains at least one uppercase letter</li>
+                                                    <li>Contains at least one lowercase letter</li>
+                                                    <li>Contains at least one number</li>
+                                                    <li>Contains at least one special character</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">Update Password</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== ACTIVITY LOG TAB ==================== -->
+                    <div class="tab-pane fade" id="activity" role="tabpanel">
+                        <div class="data-table">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0"><i class="fas fa-history"></i> Recent Activity</h5>
+                                <button class="btn btn-sm btn-outline-secondary" id="exportActivityBtn">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="activityTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Date & Time</th>
+                                            <th>Activity Type</th>
+                                            <th>Description</th>
+                                            <th>IP Address</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activityTableBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="activityPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== PREFERENCES TAB ==================== -->
+                    <div class="tab-pane fade" id="notifications" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="data-table">
+                                    <h5 class="mb-3"><i class="fas fa-bell"></i> Notification Preferences</h5>
+                                    <form id="preferencesForm">
+                                        <h6 class="mb-2">Email Notifications</h6>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailNewUser" checked>
+                                            <label class="form-check-label" for="emailNewUser">New user registration</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailNewBooking" checked>
+                                            <label class="form-check-label" for="emailNewBooking">New booking created</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailPaymentReceived" checked>
+                                            <label class="form-check-label" for="emailPaymentReceived">Payment received</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailSystemAlert">
+                                            <label class="form-check-label" for="emailSystemAlert">System alerts</label>
+                                        </div>
+                                        
+                                        <h6 class="mb-2 mt-4">Push Notifications</h6>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushNewBooking" checked>
+                                            <label class="form-check-label" for="pushNewBooking">New booking alerts</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushOrderUpdate" checked>
+                                            <label class="form-check-label" for="pushOrderUpdate">Order status updates</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushPromotions">
+                                            <label class="form-check-label" for="pushPromotions">Promotional alerts</label>
+                                        </div>
+                                        
+                                        <h6 class="mb-2 mt-4">Display Preferences</h6>
+                                        <div class="mb-3">
+                                            <label class="form-label">Dashboard Layout</label>
+                                            <select class="form-select" id="dashboardLayout">
+                                                <option value="grid">Grid View</option>
+                                                <option value="list">List View</option>
+                                                <option value="compact">Compact View</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Items per page</label>
+                                            <select class="form-select" id="itemsPerPage">
+                                                <option value="10">10</option>
+                                                <option value="25" selected>25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="compactSidebar">
+                                            <label class="form-check-label" for="compactSidebar">Compact Sidebar</label>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                            <button type="button" class="btn btn-outline-secondary ms-2" id="resetPreferencesBtn">Reset to Default</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Account Confirmation Modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Delete Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete your account?</p>
+                    <p class="text-danger"><strong>Warning:</strong> This action cannot be undone. All your data will be permanently deleted.</p>
+                    <div class="mb-3">
+                        <label class="form-label">Please enter your password to confirm:</label>
+                        <input type="password" class="form-control" id="confirmDeletePassword" placeholder="Enter your password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteAccountBtn">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/profile.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>

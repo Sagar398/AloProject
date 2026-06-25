@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li class="active"><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">No new notifications</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">System Settings</h2>
+                        <p class="text-muted">Configure application settings, branding, and system preferences</p>
+                    </div>
+                </div>
+                
+                <!-- Settings Tabs -->
+                <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
+                            <i class="fas fa-sliders-h"></i> General
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="branding-tab" data-bs-toggle="tab" data-bs-target="#branding" type="button" role="tab">
+                            <i class="fas fa-palette"></i> Branding
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button" role="tab">
+                            <i class="fas fa-envelope"></i> Email Settings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab">
+                            <i class="fas fa-credit-card"></i> Payment Settings
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="notification-tab" data-bs-toggle="tab" data-bs-target="#notification" type="button" role="tab">
+                            <i class="fas fa-bell"></i> Notifications
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                            <i class="fas fa-shield-alt"></i> Security
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="backup-tab" data-bs-toggle="tab" data-bs-target="#backup" type="button" role="tab">
+                            <i class="fas fa-database"></i> Backup
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    
+                    <!-- ==================== GENERAL SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <div class="data-table">
+                            <form id="generalSettingsForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Website Name</label>
+                                        <input type="text" class="form-control" id="websiteName" value="Alo">
+                                        <small class="text-muted">The name of your application</small>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Website URL</label>
+                                        <input type="url" class="form-control" id="websiteUrl" value="https://www.alo.com">
+                                        <small class="text-muted">Your application's base URL</small>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Default Language</label>
+                                        <select class="form-select" id="defaultLanguage">
+                                            <option value="en">English</option>
+                                            <option value="fr">French</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="ar">Arabic</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Default Currency</label>
+                                        <select class="form-select" id="defaultCurrency">
+                                            <option value="USD">USD - US Dollar</option>
+                                            <option value="EUR">EUR - Euro</option>
+                                            <option value="GBP">GBP - British Pound</option>
+                                            <option value="CAD">CAD - Canadian Dollar</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Timezone</label>
+                                        <select class="form-select" id="timezone">
+                                            <option value="America/New_York">Eastern Time (US & Canada)</option>
+                                            <option value="America/Chicago">Central Time (US & Canada)</option>
+                                            <option value="America/Denver">Mountain Time (US & Canada)</option>
+                                            <option value="America/Los_Angeles">Pacific Time (US & Canada)</option>
+                                            <option value="Europe/London">London</option>
+                                            <option value="Europe/Paris">Paris</option>
+                                            <option value="Asia/Dubai">Dubai</option>
+                                            <option value="Asia/Tokyo">Tokyo</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">Date Format</label>
+                                        <select class="form-select" id="dateFormat">
+                                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                            <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                            <label class="form-check-label" for="maintenanceMode">Maintenance Mode</label>
+                                        </div>
+                                        <small class="text-muted">When enabled, only admins can access the site</small>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary">Save General Settings</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== BRANDING SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="branding" role="tabpanel">
+                        <div class="data-table">
+                            <form id="brandingSettingsForm">
+                                <div class="row">
+                                    <div class="col-md-12 text-center mb-4">
+                                        <h5 class="mb-3">Current Logo</h5>
+                                        <img id="logoPreview" src="https://via.placeholder.com/200x80?text=Alo+Logo" alt="Logo" style="max-width: 200px; border-radius: 10px;">
+                                        <div class="mt-3">
+                                            <button type="button" class="btn btn-outline-primary" id="uploadLogoBtn">
+                                                <i class="fas fa-upload"></i> Upload Logo
+                                            </button>
+                                            <input type="file" id="logoFile" accept="image/*" style="display: none;">
+                                        </div>
+                                        <small class="text-muted d-block mt-2">Recommended size: 200x80px. Supported formats: PNG, JPG, SVG</small>
+                                    </div>
+                                    
+                                    <div class="col-md-12 text-center mb-4">
+                                        <h5 class="mb-3">Current Favicon</h5>
+                                        <img id="faviconPreview" src="https://via.placeholder.com/32x32?text=Alo" alt="Favicon" style="width: 32px; height: 32px;">
+                                        <div class="mt-3">
+                                            <button type="button" class="btn btn-outline-primary" id="uploadFaviconBtn">
+                                                <i class="fas fa-upload"></i> Upload Favicon
+                                            </button>
+                                            <input type="file" id="faviconFile" accept="image/*" style="display: none;">
+                                        </div>
+                                        <small class="text-muted d-block mt-2">Recommended size: 32x32px or 16x16px</small>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Primary Color</label>
+                                        <div class="input-group">
+                                            <input type="color" class="form-control form-control-color" id="primaryColor" value="#4361ee" style="width: 60px; padding: 5px;">
+                                            <input type="text" class="form-control" id="primaryColorHex" value="#4361ee">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Secondary Color</label>
+                                        <div class="input-group">
+                                            <input type="color" class="form-control form-control-color" id="secondaryColor" value="#3f37c9" style="width: 60px; padding: 5px;">
+                                            <input type="text" class="form-control" id="secondaryColorHex" value="#3f37c9">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-12 mb-3">
+                                        <button type="submit" class="btn btn-primary">Save Branding Settings</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== EMAIL SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="email" role="tabpanel">
+                        <div class="data-table">
+                            <form id="emailSettingsForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">SMTP Host</label>
+                                        <input type="text" class="form-control" id="smtpHost" value="smtp.gmail.com">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">SMTP Port</label>
+                                        <input type="number" class="form-control" id="smtpPort" value="587">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">SMTP Username</label>
+                                        <input type="email" class="form-control" id="smtpUsername" value="noreply@alo.com">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">SMTP Password</label>
+                                        <input type="password" class="form-control" id="smtpPassword" value="********">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">From Email</label>
+                                        <input type="email" class="form-control" id="fromEmail" value="noreply@alo.com">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">From Name</label>
+                                        <input type="text" class="form-control" id="fromName" value="Alo Support">
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="enableSSL" checked>
+                                            <label class="form-check-label" for="enableSSL">Enable SSL/TLS Encryption</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-outline-primary me-2" id="testEmailBtn">
+                                            <i class="fas fa-paper-plane"></i> Send Test Email
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Save Email Settings</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== PAYMENT SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="payment" role="tabpanel">
+                        <div class="data-table">
+                            <form id="paymentSettingsForm">
+                                <h5 class="mb-3">Commission Settings</h5>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Default Commission (%)</label>
+                                        <input type="number" class="form-control" id="defaultCommission" value="15" step="0.5">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Minimum Commission ($)</label>
+                                        <input type="number" class="form-control" id="minCommission" value="1" step="0.5">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Maximum Commission (%)</label>
+                                        <input type="number" class="form-control" id="maxCommission" value="30" step="0.5">
+                                    </div>
+                                </div>
+                                
+                                <h5 class="mb-3 mt-4">Payment Gateways</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fab fa-cc-visa fa-2x me-2"></i>
+                                                        <strong>VISA / Mastercard</strong>
+                                                    </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="enableCardPayment" checked>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3" id="cardPaymentSettings">
+                                                    <label class="form-label">Stripe Secret Key</label>
+                                                    <input type="password" class="form-control mb-2" id="stripeSecretKey" value="sk_test_xxxxxxxxxxxx">
+                                                    <label class="form-label">Stripe Publishable Key</label>
+                                                    <input type="text" class="form-control" id="stripePublishableKey" value="pk_test_xxxxxxxxxxxx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fas fa-mobile-alt fa-2x me-2"></i>
+                                                        <strong>Mobile Money (MoMo)</strong>
+                                                    </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="enableMoMo" checked>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3" id="momoSettings">
+                                                    <label class="form-label">API Key</label>
+                                                    <input type="password" class="form-control mb-2" id="momoApiKey" value="momo_api_key_xxxxx">
+                                                    <label class="form-label">API Secret</label>
+                                                    <input type="password" class="form-control" id="momoApiSecret" value="momo_api_secret_xxxxx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fas fa-credit-card fa-2x me-2"></i>
+                                                        <strong>Orange Money (OM)</strong>
+                                                    </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="enableOM" checked>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3" id="omSettings">
+                                                    <label class="form-label">Merchant ID</label>
+                                                    <input type="text" class="form-control mb-2" id="omMerchantId" value="OM_MERCHANT_001">
+                                                    <label class="form-label">API Key</label>
+                                                    <input type="password" class="form-control" id="omApiKey" value="om_api_key_xxxxx">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fas fa-university fa-2x me-2"></i>
+                                                        <strong>Bank Transfer</strong>
+                                                    </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="enableBankTransfer">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mt-3">
+                                    <button type="submit" class="btn btn-primary">Save Payment Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== NOTIFICATION SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="notification" role="tabpanel">
+                        <div class="data-table">
+                            <form id="notificationSettingsForm">
+                                <h5 class="mb-3">Email Notifications</h5>
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailNewBooking" checked>
+                                            <label class="form-check-label" for="emailNewBooking">New Booking Notification</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailBookingStatus" checked>
+                                            <label class="form-check-label" for="emailBookingStatus">Booking Status Update</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailOrderConfirmation" checked>
+                                            <label class="form-check-label" for="emailOrderConfirmation">Order Confirmation</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailPaymentReceipt" checked>
+                                            <label class="form-check-label" for="emailPaymentReceipt">Payment Receipt</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailPromotions" checked>
+                                            <label class="form-check-label" for="emailPromotions">Promotions & Offers</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="emailNewsletter" checked>
+                                            <label class="form-check-label" for="emailNewsletter">Newsletter</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h5 class="mb-3">Push Notifications</h5>
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushNewBooking" checked>
+                                            <label class="form-check-label" for="pushNewBooking">New Booking Alert</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushOrderUpdate" checked>
+                                            <label class="form-check-label" for="pushOrderUpdate">Order Status Update</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushPaymentAlert" checked>
+                                            <label class="form-check-label" for="pushPaymentAlert">Payment Alerts</label>
+                                        </div>
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" id="pushPromotions">
+                                            <label class="form-check-label" for="pushPromotions">Promotional Alerts</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Save Notification Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== SECURITY SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="security" role="tabpanel">
+                        <div class="data-table">
+                            <form id="securitySettingsForm">
+                                <h5 class="mb-3">Authentication Settings</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Session Timeout (minutes)</label>
+                                        <input type="number" class="form-control" id="sessionTimeout" value="30">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Maximum Login Attempts</label>
+                                        <input type="number" class="form-control" id="maxLoginAttempts" value="5">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                            <label class="form-check-label" for="twoFactorAuth">Enable Two-Factor Authentication for Admins</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="captchaEnabled" checked>
+                                            <label class="form-check-label" for="captchaEnabled">Enable reCAPTCHA on Login/Register</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h5 class="mb-3 mt-4">reCAPTCHA Settings</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Site Key</label>
+                                        <input type="text" class="form-control" id="recaptchaSiteKey" placeholder="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Secret Key</label>
+                                        <input type="password" class="form-control" id="recaptchaSecretKey" placeholder="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mt-3">
+                                    <button type="submit" class="btn btn-primary">Save Security Settings</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- ==================== BACKUP SETTINGS TAB ==================== -->
+                    <div class="tab-pane fade" id="backup" role="tabpanel">
+                        <div class="data-table">
+                            <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i> Regular backups help protect your data. We recommend backing up your database weekly.
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">
+                                            <h6 class="mb-0"><i class="fas fa-database"></i> Database Backup</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>Backup your entire database including users, bookings, orders, and payments.</p>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" type="checkbox" id="autoBackup" checked>
+                                                <label class="form-check-label" for="autoBackup">Enable Automatic Backups</label>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Backup Frequency</label>
+                                                <select class="form-select" id="backupFrequency">
+                                                    <option value="daily">Daily</option>
+                                                    <option value="weekly" selected>Weekly</option>
+                                                    <option value="monthly">Monthly</option>
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-primary w-100" id="createBackupBtn">
+                                                <i class="fas fa-download"></i> Create Backup Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header bg-success text-white">
+                                            <h6 class="mb-0"><i class="fas fa-history"></i> Restore Backup</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <p>Restore your database from a previous backup file.</p>
+                                            <div class="mb-3">
+                                                <label class="form-label">Select Backup File</label>
+                                                <input type="file" class="form-control" id="restoreFile" accept=".sql,.zip">
+                                            </div>
+                                            <button class="btn btn-warning w-100" id="restoreBackupBtn">
+                                                <i class="fas fa-upload"></i> Restore Backup
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-secondary text-white">
+                                            <h6 class="mb-0"><i class="fas fa-list"></i> Recent Backups</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="backupTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Backup Name</th>
+                                                            <th>Size</th>
+                                                            <th>Date Created</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="backupTableBody">
+                                                        <tr>
+                                                            <td>alo_backup_2024_01_15.sql</td>
+                                                            <td>45.2 MB</td>
+                                                            <td>2024-01-15 10:30:00</td>
+                                                            <td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>alo_backup_2024_01_08.sql</td>
+                                                            <td>44.8 MB</td>
+                                                            <td>2024-01-08 10:30:00</td>
+                                                            <td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>alo_backup_2024_01_01.sql</td>
+                                                            <td>44.5 MB</td>
+                                                            <td>2024-01-01 10:30:00</td>
+                                                            <td><button class="btn btn-sm btn-outline-primary"><i class="fas fa-download"></i> Download</button></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-danger" id="clearCacheBtn">
+                                        <i class="fas fa-trash-alt"></i> Clear System Cache
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/settings.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>

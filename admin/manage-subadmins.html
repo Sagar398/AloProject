@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sub-Admins - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li class="active"><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">2</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">New sub-admin registered</a></li>
+                            <li><a class="dropdown-item" href="#">Role permissions updated</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">Manage Sub-Admins</h2>
+                        <p class="text-muted">Manage administrators, roles and permissions</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="addSubAdminBtn">
+                            <i class="fas fa-plus-circle"></i> Add New Sub-Admin
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tabs for Sub-Admins and Roles -->
+                <ul class="nav nav-tabs mb-4" id="subAdminTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="subadmins-tab" data-bs-toggle="tab" data-bs-target="#subadmins" type="button" role="tab">
+                            <i class="fas fa-users"></i> Sub-Admins
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" type="button" role="tab">
+                            <i class="fas fa-lock"></i> Roles & Permissions
+                        </button>
+                    </li>
+                </ul>
+                
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Sub-Admins Tab -->
+                    <div class="tab-pane fade show active" id="subadmins" role="tabpanel">
+                        <!-- Filter Section -->
+                        <div class="data-table mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">Search</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                        <input type="text" class="form-control" id="subAdminSearch" placeholder="Search by name, email or ID...">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Role Filter</label>
+                                    <select class="form-select" id="roleFilter">
+                                        <option value="all">All Roles</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="support">Support</option>
+                                        <option value="viewer">Viewer</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Status Filter</label>
+                                    <select class="form-select" id="statusFilter">
+                                        <option value="all">All Status</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">&nbsp;</label>
+                                    <button class="btn btn-outline-secondary w-100" id="resetFiltersBtn">
+                                        <i class="fas fa-undo-alt"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sub-Admins Table -->
+                        <div class="data-table">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="subAdminsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Sub-Admin</th>
+                                            <th>Email</th>
+                                            <th>Mobile No.</th>
+                                            <th>Role</th>
+                                            <th>Created At</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subAdminsTableBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav class="mt-3">
+                                <ul class="pagination justify-content-end" id="subAdminsPagination"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                    
+                    <!-- Roles & Permissions Tab -->
+                    <div class="tab-pane fade" id="roles" role="tabpanel">
+                        <!-- Add Role Button -->
+                        <div class="mb-4 text-end">
+                            <button class="btn btn-primary" id="addRoleBtn">
+                                <i class="fas fa-plus-circle"></i> Add New Role
+                            </button>
+                        </div>
+                        
+                        <!-- Roles Table -->
+                        <div class="data-table">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="rolesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Role ID</th>
+                                            <th>Role Name</th>
+                                            <th>Permissions</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="rolesTableBody">
+                                        <!-- Dynamic content -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Sub-Admin Modal -->
+    <div class="modal fade" id="subAdminModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="subAdminModalTitle"><i class="fas fa-user-plus"></i> Add Sub-Admin</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editSubAdminId">
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-3">
+                            <div class="profile-image-upload">
+                                <img id="subAdminImagePreview" src="https://via.placeholder.com/100" alt="Profile" class="rounded-circle" width="100" height="100">
+                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="uploadImageBtn">
+                                    <i class="fas fa-camera"></i> Upload Image
+                                </button>
+                                <input type="file" id="subAdminImage" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Sub-Admin Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="subAdminName" placeholder="Enter full name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="subAdminEmail" placeholder="Enter email address">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="subAdminMobile" placeholder="Enter mobile number">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Role <span class="text-danger">*</span></label>
+                            <select class="form-select" id="subAdminRole">
+                                <option value="">Select Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="manager">Manager</option>
+                                <option value="support">Support</option>
+                                <option value="viewer">Viewer</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3" id="passwordFields">
+                            <label class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="subAdminPassword" placeholder="Enter password">
+                        </div>
+                        <div class="col-md-6 mb-3" id="confirmPasswordFields">
+                            <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="subAdminConfirmPassword" placeholder="Confirm password">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="subAdminStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveSubAdminBtn">Save Sub-Admin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Role Modal -->
+    <div class="modal fade" id="roleModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="roleModalTitle"><i class="fas fa-lock"></i> Add Role</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editRoleId">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Role Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="roleName" placeholder="Enter role name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="roleStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h6 class="mt-3 mb-3">Permissions</h6>
+                    <div class="row permissions-grid" id="permissionsContainer">
+                        <!-- Dashboard Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Dashboard</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_dashboard_view">
+                                    <label class="form-check-label" for="perm_dashboard_view">View Dashboard</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bookings Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Bookings</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_bookings_view">
+                                    <label class="form-check-label" for="perm_bookings_view">View Bookings</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_bookings_edit">
+                                    <label class="form-check-label" for="perm_bookings_edit">Edit Bookings</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_bookings_delete">
+                                    <label class="form-check-label" for="perm_bookings_delete">Delete Bookings</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Orders Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Orders</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_orders_view">
+                                    <label class="form-check-label" for="perm_orders_view">View Orders</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_orders_edit">
+                                    <label class="form-check-label" for="perm_orders_edit">Edit Orders</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_orders_delete">
+                                    <label class="form-check-label" for="perm_orders_delete">Delete Orders</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payments Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Payments</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_payments_view">
+                                    <label class="form-check-label" for="perm_payments_view">View Payments</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_payments_process">
+                                    <label class="form-check-label" for="perm_payments_process">Process Payments</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_settlements_view">
+                                    <label class="form-check-label" for="perm_settlements_view">View Settlements</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Service Providers Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Service Providers</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_providers_view">
+                                    <label class="form-check-label" for="perm_providers_view">View Providers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_providers_add">
+                                    <label class="form-check-label" for="perm_providers_add">Add Providers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_providers_edit">
+                                    <label class="form-check-label" for="perm_providers_edit">Edit Providers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_providers_delete">
+                                    <label class="form-check-label" for="perm_providers_delete">Delete Providers</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sellers Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Sellers/Shops</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_sellers_view">
+                                    <label class="form-check-label" for="perm_sellers_view">View Sellers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_sellers_add">
+                                    <label class="form-check-label" for="perm_sellers_add">Add Sellers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_sellers_edit">
+                                    <label class="form-check-label" for="perm_sellers_edit">Edit Sellers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_sellers_delete">
+                                    <label class="form-check-label" for="perm_sellers_delete">Delete Sellers</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Customers Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Customers</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_customers_view">
+                                    <label class="form-check-label" for="perm_customers_view">View Customers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_customers_edit">
+                                    <label class="form-check-label" for="perm_customers_edit">Edit Customers</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_customers_block">
+                                    <label class="form-check-label" for="perm_customers_block">Block Customers</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Reports Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Reports</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_reports_view">
+                                    <label class="form-check-label" for="perm_reports_view">View Reports</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_reports_export">
+                                    <label class="form-check-label" for="perm_reports_export">Export Reports</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Settings</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_settings_view">
+                                    <label class="form-check-label" for="perm_settings_view">View Settings</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_settings_edit">
+                                    <label class="form-check-label" for="perm_settings_edit">Edit Settings</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sub-Admins Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Sub-Admins</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_subadmins_view">
+                                    <label class="form-check-label" for="perm_subadmins_view">View Sub-Admins</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_subadmins_add">
+                                    <label class="form-check-label" for="perm_subadmins_add">Add Sub-Admins</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_subadmins_edit">
+                                    <label class="form-check-label" for="perm_subadmins_edit">Edit Sub-Admins</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_subadmins_delete">
+                                    <label class="form-check-label" for="perm_subadmins_delete">Delete Sub-Admins</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Roles Permissions -->
+                        <div class="col-md-6 mb-3">
+                            <div class="permission-group">
+                                <h6 class="mb-2">Roles</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_roles_view">
+                                    <label class="form-check-label" for="perm_roles_view">View Roles</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_roles_add">
+                                    <label class="form-check-label" for="perm_roles_add">Add Roles</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_roles_edit">
+                                    <label class="form-check-label" for="perm_roles_edit">Edit Roles</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="perm_roles_delete">
+                                    <label class="form-check-label" for="perm_roles_delete">Delete Roles</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveRoleBtn">Save Role</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-trash-alt"></i> Confirm Delete</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteItemId">
+                    <input type="hidden" id="deleteItemType">
+                    <p>Are you sure you want to delete this item?</p>
+                    <p class="text-danger"><strong>Warning:</strong> This action cannot be undone. All data related to this item will be permanently deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- View Sub-Admin Modal -->
+    <div class="modal fade" id="viewSubAdminModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fas fa-user-circle"></i> Sub-Admin Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="viewSubAdminBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/managesubadmins.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alo - Select Services</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-tools" style="font-size: 36px; color: var(--primary-color);"></i>
+                <h4 class="mt-2 text-white">Alo</h4>
+                <small class="text-white-50">Service Provider</small>
+            </div>
+            
+            <div class="text-center px-3 py-3">
+                <img src="https://via.placeholder.com/60" alt="Profile" class="rounded-circle mb-2" id="sidebarProfileImg" style="width: 60px; height: 60px; object-fit: cover;">
+                <h6 class="mb-0 text-white" id="sidebarProviderName">Loading...</h6>
+                <small class="text-muted" id="sidebarProviderService">Loading...</small>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="select-services.html">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Select Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-services.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>My Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="booking-list.html">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Booking List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="availability.html">
+                        <i class="fas fa-clock"></i>
+                        <span>Availability</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="manage-service-man.html">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Service Man</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reviews.html">
+                        <i class="fas fa-star"></i>
+                        <span>Reviews</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="payment.html">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile-settings.html">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider">
+                    <hr class="my-2" style="border-color: rgba(255,255,255,0.1);">
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link text-dark d-lg-none me-3" id="sidebarToggle">
+                        <i class="fas fa-bars" style="font-size: 20px;"></i>
+                    </button>
+                    <h5 class="mb-0">Select Services</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;" id="notificationCount">0</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">Notifications</h6></li>
+                            <div id="notificationList">
+                                <li><a class="dropdown-item text-muted" href="#">Loading...</a></li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-1" id="topBarUserImg" style="width: 30px; height: 30px; object-fit: cover;">
+                            <span id="topBarUserName">Loading...</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile-settings.html"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="profile-settings.html#password"><i class="fas fa-key me-2"></i>Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content-wrapper">
+                
+                <!-- Page Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="stat-card bg-primary text-white">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4>Select Services</h4>
+                                    <p class="mb-0 opacity-75">Choose from the available services below to add to your profile.</p>
+                                </div>
+                                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                    <span class="opacity-75">Selected: <strong id="selectedCount">0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search and Filter -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" id="searchService" placeholder="Search services by name or category...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="filterCategory">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="filterStatus">
+                            <option value="all">All Services</option>
+                            <option value="available">Available</option>
+                            <option value="selected">Already Selected</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Services Grid -->
+                <div class="row g-4" id="servicesGrid">
+                    <div class="col-12 text-center text-muted py-5">
+                        <i class="fas fa-spinner fa-spin fa-2x mb-3"></i>
+                        <p>Loading services...</p>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/service_provider/select-services.js"></script>
+    
+</body>
+</html>

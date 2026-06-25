@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alo - Seller Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-store" style="font-size: 36px; color: var(--primary-color);"></i>
+                <h4 class="mt-2 text-white">Alo</h4>
+                <small class="text-white-50">Seller</small>
+            </div>
+            
+            <div class="text-center px-3 py-3">
+                <img src="https://via.placeholder.com/60" alt="Shop" class="rounded-circle mb-2" id="sidebarProfileImg" style="width: 60px; height: 60px; object-fit: cover;">
+                <h6 class="mb-0 text-white" id="sidebarShopName">Loading...</h6>
+                <small class="text-muted" id="sidebarShopType">Loading...</small>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-items.html">
+                        <i class="fas fa-boxes"></i>
+                        <span>My Items</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="orders.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="payment.html">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reports.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile.html">
+                        <i class="fas fa-user-cog"></i>
+                        <span>My Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider">
+                    <hr class="my-2" style="border-color: rgba(255,255,255,0.1);">
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link text-dark d-lg-none me-3" id="sidebarToggle">
+                        <i class="fas fa-bars" style="font-size: 20px;"></i>
+                    </button>
+                    <h5 class="mb-0">Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;" id="notificationCount">0</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">Notifications</h6></li>
+                            <div id="notificationList">
+                                <li><a class="dropdown-item text-muted" href="#">Loading...</a></li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <img src="https://via.placeholder.com/30" alt="Shop" class="rounded-circle me-1" id="topBarUserImg" style="width: 30px; height: 30px; object-fit: cover;">
+                            <span id="topBarUserName">Loading...</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="profile.html#password"><i class="fas fa-key me-2"></i>Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content-wrapper">
+                
+                <!-- Welcome Banner -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="stat-card bg-primary text-white">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4>Welcome back, <span id="welcomeName">Shop</span>! 👋</h4>
+                                    <p class="mb-0 opacity-75">Here's what's happening with your shop today.</p>
+                                </div>
+                                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                    <span id="currentDate" class="opacity-75"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="row g-4 mb-4" id="statsCards">
+                    <!-- Stats cards loaded by JS -->
+                </div>
+                
+                <!-- Recent Orders Table -->
+                <div class="data-table">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Recent 5 Orders</h5>
+                        <a href="orders.html" class="btn btn-sm btn-outline-primary">View All <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Customer Email</th>
+                                    <th>Customer Mobile</th>
+                                    <th>Time Slot</th>
+                                    <th>Total Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Payment Status</th>
+                                    <th>Order Type</th>
+                                    <th>Order Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersTable">
+                                <tr>
+                                    <td colspan="11" class="text-center text-muted py-4">
+                                        <i class="fas fa-spinner fa-spin me-2"></i>Loading orders...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/seller/dashboard.js"></script>
+    
+</body>
+</html>

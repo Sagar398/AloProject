@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alo - Profile Settings</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-tools" style="font-size: 36px; color: var(--primary-color);"></i>
+                <h4 class="mt-2 text-white">Alo</h4>
+                <small class="text-white-50">Service Provider</small>
+            </div>
+            
+            <div class="text-center px-3 py-3">
+                <img src="https://via.placeholder.com/60" alt="Profile" class="rounded-circle mb-2" id="sidebarProfileImg" style="width: 60px; height: 60px; object-fit: cover;">
+                <h6 class="mb-0 text-white" id="sidebarProviderName">Loading...</h6>
+                <small class="text-muted" id="sidebarProviderService">Loading...</small>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="select-services.html">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Select Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="my-services.html">
+                        <i class="fas fa-cogs"></i>
+                        <span>My Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="booking-list.html">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Booking List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="availability.html">
+                        <i class="fas fa-clock"></i>
+                        <span>Availability</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="manage-service-man.html">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Service Man</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reviews.html">
+                        <i class="fas fa-star"></i>
+                        <span>Reviews</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="payment.html">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="profile-settings.html">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Profile Settings</span>
+                    </a>
+                </li>
+                <li class="sidebar-divider">
+                    <hr class="my-2" style="border-color: rgba(255,255,255,0.1);">
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link text-dark d-lg-none me-3" id="sidebarToggle">
+                        <i class="fas fa-bars" style="font-size: 20px;"></i>
+                    </button>
+                    <h5 class="mb-0">Profile Settings</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;" id="notificationCount">0</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">Notifications</h6></li>
+                            <div id="notificationList">
+                                <li><a class="dropdown-item text-muted" href="#">Loading...</a></li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <img src="https://via.placeholder.com/30" alt="Profile" class="rounded-circle me-1" id="topBarUserImg" style="width: 30px; height: 30px; object-fit: cover;">
+                            <span id="topBarUserName">Loading...</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile-settings.html"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="#password"><i class="fas fa-key me-2"></i>Change Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content-wrapper">
+                
+                <!-- Page Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h4>Profile Settings</h4>
+                        <p class="text-muted">Manage your profile information and account settings.</p>
+                    </div>
+                </div>
+                
+                <!-- Profile Tabs -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="data-table">
+                            <ul class="nav nav-pills" id="profileTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="basic-tab" data-bs-toggle="pill" data-bs-target="#basicDetails" type="button" role="tab">
+                                        <i class="fas fa-user me-1"></i> Basic Details
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="address-tab" data-bs-toggle="pill" data-bs-target="#addressDetails" type="button" role="tab">
+                                        <i class="fas fa-map-marker-alt me-1"></i> Address Details
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="company-tab" data-bs-toggle="pill" data-bs-target="#companyDetails" type="button" role="tab">
+                                        <i class="fas fa-building me-1"></i> Company Details
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="professional-tab" data-bs-toggle="pill" data-bs-target="#professionalDetails" type="button" role="tab">
+                                        <i class="fas fa-briefcase me-1"></i> Professional
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="password-tab" data-bs-toggle="pill" data-bs-target="#changePassword" type="button" role="tab">
+                                        <i class="fas fa-lock me-1"></i> Password
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="tab-content" id="profileTabContent">
+                    
+                    <!-- Basic Details -->
+                    <div class="tab-pane fade show active" id="basicDetails" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Basic Details</h5>
+                            <form id="basicDetailsForm">
+                                <div class="text-center mb-4">
+                                    <div class="position-relative d-inline-block">
+                                        <img src="https://via.placeholder.com/120" alt="Profile" class="rounded-circle" id="profileImagePreview" style="width: 120px; height: 120px; object-fit: cover;">
+                                        <label for="profileImage" class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-2" style="cursor: pointer; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-camera"></i>
+                                        </label>
+                                        <input type="file" id="profileImage" accept="image/*" style="display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="emailAddress" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="emailAddress" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="mobileNumber" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="mobileNumber" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                        <div class="d-flex gap-3 mt-2">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" id="male" value="Male">
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="gender" id="female" value="Female">
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Service Provider Type <span class="text-danger">*</span></label>
+                                        <div class="d-flex gap-3 mt-2">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="providerType" id="individual" value="Individual">
+                                                <label class="form-check-label" for="individual">Individual</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="providerType" id="company" value="Company">
+                                                <label class="form-check-label" for="company">Company</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" id="updateBasicDetails">
+                                        <i class="fas fa-save me-1"></i> Update Basic Details
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Address Details -->
+                    <div class="tab-pane fade" id="addressDetails" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Business Address Details</h5>
+                            <form id="addressDetailsForm">
+                                <div class="mb-3">
+                                    <label for="addressLine1" class="form-label">Address Line 1 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="addressLine1" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="addressLine2" class="form-label">Address Line 2</label>
+                                    <input type="text" class="form-control" id="addressLine2">
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="country" class="form-label">Country <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="country" required>
+                                            <option value="">Select Country</option>
+                                            <option value="France">France</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Belgium">Belgium</option>
+                                            <option value="Switzerland">Switzerland</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="city" required>
+                                            <option value="">Select City</option>
+                                            <option value="Paris">Paris</option>
+                                            <option value="Lyon">Lyon</option>
+                                            <option value="Marseille">Marseille</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="postalCode" class="form-label">Postal Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="postalCode" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="latitude" class="form-label">Latitude</label>
+                                        <input type="text" class="form-control" id="latitude">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="longitude" class="form-label">Longitude</label>
+                                        <input type="text" class="form-control" id="longitude">
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" id="updateAddressDetails">
+                                        <i class="fas fa-save me-1"></i> Update Address Details
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Company Details -->
+                    <div class="tab-pane fade" id="companyDetails" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Company Address Details</h5>
+                            <form id="companyDetailsForm">
+                                <div class="mb-3">
+                                    <label for="companyAddressLine1" class="form-label">Company Address Line 1</label>
+                                    <input type="text" class="form-control" id="companyAddressLine1">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="companyAddressLine2" class="form-label">Company Address Line 2</label>
+                                    <input type="text" class="form-control" id="companyAddressLine2">
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="companyCountry" class="form-label">Country</label>
+                                        <select class="form-select" id="companyCountry">
+                                            <option value="">Select Country</option>
+                                            <option value="France">France</option>
+                                            <option value="Canada">Canada</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="companyCity" class="form-label">City</label>
+                                        <select class="form-select" id="companyCity">
+                                            <option value="">Select City</option>
+                                            <option value="Paris">Paris</option>
+                                            <option value="Lyon">Lyon</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="companyPostalCode" class="form-label">Postal Code</label>
+                                        <input type="text" class="form-control" id="companyPostalCode">
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="companyLatitude" class="form-label">Latitude</label>
+                                        <input type="text" class="form-control" id="companyLatitude">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="companyLongitude" class="form-label">Longitude</label>
+                                        <input type="text" class="form-control" id="companyLongitude">
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" id="updateCompanyDetails">
+                                        <i class="fas fa-save me-1"></i> Update Company Details
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Professional Details -->
+                    <div class="tab-pane fade" id="professionalDetails" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Professional Details</h5>
+                            <form id="professionalDetailsForm">
+                                <div class="mb-3">
+                                    <label for="experience" class="form-label">Experience</label>
+                                    <input type="text" class="form-control" id="experience" placeholder="e.g., 8 Years">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="skills" class="form-label">Skills</label>
+                                    <textarea class="form-control" id="skills" rows="3" placeholder="Enter your skills (e.g., Plumbing, Electrical, Carpentry)"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="providerDescription" class="form-label">Service Provider Description</label>
+                                    <textarea class="form-control" id="providerDescription" rows="4" placeholder="Describe your services and expertise"></textarea>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" id="updateProfessionalDetails">
+                                        <i class="fas fa-save me-1"></i> Update Professional Details
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Change Password -->
+                    <div class="tab-pane fade" id="changePassword" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Update Password</h5>
+                            <form id="passwordForm">
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Current Password <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password" required>
+                                        <span class="input-group-text toggle-password" style="cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">New Password <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="newPassword" placeholder="Enter new password" required>
+                                        <span class="input-group-text toggle-password" style="cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    <small class="text-muted">Password must be at least 8 characters long.</small>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="confirmPassword" class="form-label">Confirm New Password <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password" required>
+                                        <span class="input-group-text toggle-password" style="cursor: pointer;">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-primary" id="updatePasswordBtn">
+                                        <i class="fas fa-key me-1"></i> Update Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms & Conditions -->
+                    <div class="tab-pane fade" id="termsConditions" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Terms and Conditions</h5>
+                            <div id="termsContent">
+                                <!-- Terms loaded by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Privacy Policy -->
+                    <div class="tab-pane fade" id="privacyPolicy" role="tabpanel">
+                        <div class="data-table">
+                            <h5 class="mb-4">Privacy Policy</h5>
+                            <div id="privacyContent">
+                                <!-- Privacy policy loaded by JS -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/service_provider/profile-settings.js"></script>
+    
+</body>
+</html>

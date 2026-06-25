@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sellers/Shops - Admin | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-bolt"></i>
+                <h4>Alo Admin</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="booking-list.html"><i class="fas fa-calendar-check"></i> Booking List</a></li>
+                <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                <li><a href="payment.html"><i class="fas fa-credit-card"></i> Payment</a></li>
+                <li><a href="manage-subadmins.html"><i class="fas fa-users-cog"></i> Manage Sub-Admins</a></li>
+                <li><a href="pages.html"><i class="fas fa-file-alt"></i> Pages</a></li>
+                <li><a href="manage-service-providers.html"><i class="fas fa-tools"></i> Service Providers</a></li>
+                <li class="active"><a href="manage-sellers.html"><i class="fas fa-store"></i> Sellers/Shop</a></li>
+                <li><a href="manage-inventory.html"><i class="fas fa-boxes"></i> Inventory</a></li>
+                <li><a href="manage-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="master.html"><i class="fas fa-database"></i> Master</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="system-settings.html"><i class="fas fa-cog"></i> System Settings</a></li>
+                <li><a href="profile.html"><i class="fas fa-user-circle"></i> My Profile</a></li>
+                <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <button class="btn btn-link" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" id="darkModeToggle" data-theme-toggle><i class="fas fa-moon"></i></button>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">2</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">New seller registered</a></li>
+                            <li><a class="dropdown-item" href="#">New product added to inventory</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-3">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                            <span class="ms-2">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="system-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <div>
+                        <h2 class="mb-1">Manage Sellers & Shops</h2>
+                        <p class="text-muted">Manage seller accounts, shop details, and track performance</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="addSellerBtn">
+                            <i class="fas fa-plus-circle"></i> Add Seller/Shop
+                        </button>
+                        <button class="btn btn-outline-primary ms-2" id="exportSellersBtn">
+                            <i class="fas fa-file-excel"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Statistics Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalSellers">0</h3>
+                                    <p class="text-muted mb-0">Total Sellers</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="activeSellers">0</h3>
+                                    <p class="text-muted mb-0">Active Sellers</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalItems">0</h3>
+                                    <p class="text-muted mb-0">Total Items</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 id="totalRevenue">$0</h3>
+                                    <p class="text-muted mb-0">Total Revenue</p>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Section -->
+                <div class="data-table mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Search</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" class="form-control" id="searchSeller" placeholder="Seller name, shop name, email...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" id="sellerStatusFilter">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Verification Status</label>
+                            <select class="form-select" id="verificationStatusFilter">
+                                <option value="all">All</option>
+                                <option value="verified">Verified</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <button class="btn btn-outline-secondary w-100" id="resetFiltersBtn">
+                                <i class="fas fa-undo-alt"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sellers Table -->
+                <div class="data-table">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="sellersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Seller Info</th>
+                                    <th>Shop Details</th>
+                                    <th>Contact</th>
+                                    <th>Items</th>
+                                    <th>Revenue</th>
+                                    <th>Verification</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sellersTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav class="mt-3">
+                        <ul class="pagination justify-content-end" id="sellersPagination"></ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Seller Modal -->
+    <div class="modal fade" id="sellerModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="sellerModalTitle"><i class="fas fa-store"></i> Add Seller/Shop</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editSellerId">
+                    
+                    <!-- Seller Details -->
+                    <h6 class="mb-3 text-primary"><i class="fas fa-user"></i> Seller Details</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-12 text-center mb-3">
+                            <div class="profile-image-upload">
+                                <img id="sellerImagePreview" src="https://via.placeholder.com/100" alt="Profile" class="rounded-circle" width="100" height="100">
+                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="uploadSellerImageBtn">
+                                    <i class="fas fa-camera"></i> Upload Image
+                                </button>
+                                <input type="file" id="sellerImage" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Seller Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="sellerName" placeholder="Enter full name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="sellerEmail" placeholder="Enter email address">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="sellerMobile" placeholder="Enter mobile number">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Gender</label>
+                            <select class="form-select" id="sellerGender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-9 mb-3">
+                            <label class="form-label">Seller Description</label>
+                            <textarea class="form-control" id="sellerDescription" rows="2" placeholder="Brief description about the seller..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Shop Details -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-shop"></i> Shop Details</h6>
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-3">
+                            <div class="profile-image-upload">
+                                <img id="shopImagePreview" src="https://via.placeholder.com/100" alt="Shop Logo" class="rounded" width="100" height="100">
+                                <button type="button" class="btn btn-sm btn-outline-primary mt-2" id="uploadShopImageBtn">
+                                    <i class="fas fa-camera"></i> Upload Shop Logo
+                                </button>
+                                <input type="file" id="shopImage" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Shop Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="shopName" placeholder="Enter shop name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Shop Email</label>
+                            <input type="email" class="form-control" id="shopEmail" placeholder="Enter shop email">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Shop Mobile</label>
+                            <input type="tel" class="form-control" id="shopMobile" placeholder="Enter shop mobile">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Address Line 1</label>
+                            <input type="text" class="form-control" id="shopAddressLine1" placeholder="Street address">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Address Line 2</label>
+                            <input type="text" class="form-control" id="shopAddressLine2" placeholder="Apartment, suite, etc.">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Country</label>
+                            <select class="form-select" id="shopCountry">
+                                <option value="USA">United States</option>
+                                <option value="Canada">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Australia">Australia</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" id="shopCity" placeholder="City">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Postal Code</label>
+                            <input type="text" class="form-control" id="shopPostalCode" placeholder="Postal code">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">Shop Category</label>
+                            <select class="form-select" id="shopCategory">
+                                <option value="">Select Category</option>
+                                <option value="tools">Tools & Hardware</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="paint">Paint & Supplies</option>
+                                <option value="plumbing">Plumbing Supplies</option>
+                                <option value="electrical">Electrical Supplies</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Shop Description</label>
+                            <textarea class="form-control" id="shopDescription" rows="2" placeholder="Brief description about the shop..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Professional Details -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-briefcase"></i> Professional Details</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Service Categories Offered</label>
+                            <select class="form-select" id="serviceCategories" multiple size="3">
+                                <option value="plumbing">Plumbing</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="painting">Painting</option>
+                                <option value="carpentry">Carpentry</option>
+                                <option value="hvac">HVAC</option>
+                                <option value="cleaning">Cleaning</option>
+                            </select>
+                            <small class="text-muted">Hold Ctrl to select multiple</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Years in Business</label>
+                            <input type="number" class="form-control" id="yearsInBusiness" placeholder="Years in business" min="0">
+                        </div>
+                    </div>
+                    
+                    <!-- Account Details -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-credit-card"></i> Account Details</h6>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Account Holder Name</label>
+                            <input type="text" class="form-control" id="sellerAccountHolderName" placeholder="Account holder name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Bank Name</label>
+                            <input type="text" class="form-control" id="sellerBankName" placeholder="Bank name">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Account Number</label>
+                            <input type="text" class="form-control" id="sellerAccountNumber" placeholder="Account number">
+                        </div>
+                    </div>
+                    
+                    <!-- Status & Verification -->
+                    <h6 class="mb-3 mt-3 text-primary"><i class="fas fa-check-circle"></i> Status & Verification</h6>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Account Status</label>
+                            <select class="form-select" id="sellerAccountStatus">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Verification Status</label>
+                            <select class="form-select" id="verificationStatus">
+                                <option value="pending">Pending</option>
+                                <option value="verified">Verified</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3" id="sellerPasswordFields">
+                            <label class="form-label">Temporary Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="sellerPassword" placeholder="Enter password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveSellerBtn">Save Seller</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- View Seller Modal -->
+    <div class="modal fade" id="viewSellerModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fas fa-store"></i> Seller/Shop Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="viewSellerBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- View Items Modal -->
+    <div class="modal fade" id="viewItemsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title"><i class="fas fa-boxes"></i> Shop Items</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="viewItemsBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-trash-alt"></i> Confirm Delete</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="deleteSellerId">
+                    <p>Are you sure you want to delete this seller/shop?</p>
+                    <p class="text-danger"><strong>Warning:</strong> This action cannot be undone. All data related to this seller including items and orders will be permanently deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin/sellers.js"></script>
+    
+    <!-- Theme Manager - Include this on EVERY page -->
+    <script src="../js/theme-manager.js"></script>
+</body>
+</html>
