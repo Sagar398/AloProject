@@ -1,10 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Customer | Alo</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>Alo</span>
+                </div>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="user-profile">
+                <img id="userAvatar" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" class="user-avatar">
+                <h5 id="userName">John Doe</h5>
+                <span class="user-role">Customer</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="sidebar-menu">
+                    <li class="active"><a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="bookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a></li>
+                    <li><a href="orders.html"><i class="fas fa-shopping-cart"></i> My Orders</a></li>
+                    <li><a href="purchases.html"><i class="fas fa-history"></i> My Purchases</a></li>
+                    <li><a href="services.html"><i class="fas fa-tools"></i> Services</a></li>
+                    <li><a href="favorites.html"><i class="fas fa-heart"></i> Favorites</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
 
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h4>Dashboard</h4>
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search services, shops..." id="searchInput">
+                    </div>
+                    
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <div class="notification-dropdown">
+                        <button class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                        <div class="notification-menu" id="notificationMenu">
+                            <h6>Notifications</h6>
+                            <div class="notification-item unread">
+                                <i class="fas fa-check-circle"></i>
+                                <div>
+                                    <p>Booking confirmed #BK1003</p>
+                                    <small>2 min ago</small>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <i class="fas fa-truck"></i>
+                                <div>
+                                    <p>Order #ORD1002 shipped</p>
+                                    <small>1 hour ago</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <p>Service completed by John</p>
+                                    <small>Yesterday</small>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="notifications.html">View all</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="content-wrapper">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div>
+                        <h2>Welcome back, <span id="welcomeName">John Doe</span>! 👋</h2>
+                        <p>Ready to book your next service? We've got you covered.</p>
+                    </div>
+                    <div class="quick-actions">
+                        <button class="btn btn-primary" onclick="location.href='services.html'">
+                            <i class="fas fa-plus-circle"></i> Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalBookings">0</h3>
+                            <p>Total Bookings</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalOrders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="pendingBookings">0</h3>
+                            <p>Pending</p>
+                        </div>
+                        <div class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 3%
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalSpent">$0</h3>
+                            <p>Total Spent</p>
+                        </div>
+                        <div class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 15%
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h5>Booking Activity</h5>
+                            <select id="chartPeriod">
+                                <option value="week">This Week</option>
+                                <option value="month" selected>This Month</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="bookingChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h5>Spending Breakdown</h5>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="spendingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-section">
+                    <div class="section-header">
+                        <h5>Recent Activity</h5>
+                        <a href="activity.html" class="view-all">View All</a>
+                    </div>
+                    <div class="activity-list" id="activityList">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+
+                <!-- Quick Services -->
+                <div class="quick-services">
+                    <div class="section-header">
+                        <h5>Quick Services</h5>
+                        <a href="services.html" class="view-all">View All</a>
+                    </div>
+                    <div class="services-grid" id="quickServices">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <p>&copy; 2024 Alo. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/theme-manager.js"></script>
+    <script src="../js/customer/dashboard.js"></script>
 </body>
 </html>
